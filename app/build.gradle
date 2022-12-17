@@ -1,0 +1,37 @@
+/*
+ * Hola
+ */
+
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:31.0.1-jre'
+
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    implementation 'com.itextpdf:itext7-core:7.1.8'
+    // https://mvnrepository.com/artifact/org.netbeans.external/AbsoluteLayout
+    implementation 'org.netbeans.external:AbsoluteLayout:RELEASE150'
+
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'ventanas.Login'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
