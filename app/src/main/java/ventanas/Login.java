@@ -3,6 +3,10 @@
  */
 package ventanas;
 
+import BD.BDSentences;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +22,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
 //        Cambiar locacion principal
         this.setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -124,18 +128,17 @@ public class Login extends javax.swing.JFrame {
 
 //    Evento que permitirá iniciar sesión y cambiar de ventana
     private void btn_enterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_enterMouseClicked
-        String usuario = "Admin";
-        String contrasenia = "123";
-        
-        String pass = new String(field_password.getPassword());
-        
-        if(field_user.getText().equals(usuario) && pass.equals(contrasenia)) {
-            MainMenu menuPrincipal = new MainMenu();
-            menuPrincipal.setVisible(true);
+        try {
+            BDSentences db = new BDSentences(field_user.getText(), new String(field_password.getPassword()));
+            if (db.isConnected()) {
+                MainMenu menuPrincipal = new MainMenu(db);
+                menuPrincipal.setVisible(true);
+                dispose();
+            }
             dispose();
-        }
-        else{
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_enterMouseClicked
 

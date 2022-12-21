@@ -23,6 +23,8 @@ dependencies {
     implementation 'com.itextpdf:itext7-core:7.1.8'
     // https://mvnrepository.com/artifact/org.netbeans.external/AbsoluteLayout
     implementation 'org.netbeans.external:AbsoluteLayout:RELEASE150'
+    //  Base de datos
+    implementation 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
 
 }
 
