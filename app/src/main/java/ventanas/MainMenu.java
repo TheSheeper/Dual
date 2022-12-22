@@ -6,6 +6,7 @@ package ventanas;
 
 import BD.BDSentences;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -95,6 +96,8 @@ public class MainMenu extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(31, 61, 109));
         Header.setPreferredSize(new java.awt.Dimension(800, 80));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(MainMenu.class.getResource("/imagenes/icons/logo_its_60.png")));
         Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 60));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -124,6 +127,7 @@ public class MainMenu extends javax.swing.JFrame {
         label_search.setText("Numero de control:");
         Matricula.add(label_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        botonBusqueda.setIcon(new javax.swing.ImageIcon(MainMenu.class.getResource("/imagenes/buttons/search_button.png")));
         botonBusqueda.setMargin(new java.awt.Insets(0, 0, 0, 0));
         botonBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,8 +317,18 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_text_field_searchActionPerformed
 
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
-        student_name.setText("Mauricio Ruiz Vaquera");
-        student_number.setText("ITS");
+        if(student_number.getText().equals("") || student_number.getText().length() < 8){
+            return;
+        }
+        try{
+            bd.Busqueda(student_name.getText());
+            student_name.setText(bd.getNombre_alumno()+" "+bd.getAlumno_apellido_pat()+" "+bd.getAlumno_apellido_mat());
+            student_number.setText(bd.getAlumno_institucion());
+        }
+        catch(SQLException | IOException e){
+            JOptionPane.showMessageDialog(null, e);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_botonBusquedaActionPerformed
 
     private void btn_desplegarCartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desplegarCartaActionPerformed

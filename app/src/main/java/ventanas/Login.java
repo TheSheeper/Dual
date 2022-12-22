@@ -135,9 +135,11 @@ public class Login extends javax.swing.JFrame {
                 menuPrincipal.setVisible(true);
                 dispose();
             }
-            dispose();
+            else{
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            JOptionPane.showMessageDialog(null, ex);
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_enterMouseClicked
