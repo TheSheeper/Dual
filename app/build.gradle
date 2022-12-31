@@ -25,6 +25,15 @@ dependencies {
     implementation 'org.netbeans.external:AbsoluteLayout:RELEASE150'
     //  Base de datos
     implementation 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    testImplementation 'org.slf4j:slf4j-simple:2.0.6'
+
+
+
+
+
 
 }
 

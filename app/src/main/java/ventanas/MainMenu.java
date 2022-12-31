@@ -20,11 +20,14 @@ import mail.MailSession;
  */
 public class MainMenu extends javax.swing.JFrame {
 //    Variables
+
     private MailSession email_sesion = new MailSession();
     private BDSentences bd = null;
-    
+    private String nombreAlumno = "";
+
     /**
      * Creates new form MainMenu
+     *
      * @param bd
      */
     public MainMenu(BDSentences bd) {
@@ -65,17 +68,6 @@ public class MainMenu extends javax.swing.JFrame {
         btn_desplegarCarta = new javax.swing.JButton();
         btn_desplegarDocs = new javax.swing.JButton();
         btn_email = new javax.swing.JButton();
-        Panel_email = new javax.swing.JPanel();
-        label_titulo_email = new javax.swing.JLabel();
-        email_asunto = new javax.swing.JTextField();
-        label_asunto_email = new javax.swing.JLabel();
-        email_mensaje = new javax.swing.JTextField();
-        email_archivo = new javax.swing.JLabel();
-        email_destinatario = new javax.swing.JTextField();
-        label_email_email = new javax.swing.JLabel();
-        label_txt_email1 = new javax.swing.JLabel();
-        label_archivo_email1 = new javax.swing.JLabel();
-        email_btn_enviar = new javax.swing.JButton();
         Panel_carta = new javax.swing.JPanel();
         btn_imprimirCarta = new javax.swing.JButton();
         btn_generarCarta = new javax.swing.JButton();
@@ -87,6 +79,17 @@ public class MainMenu extends javax.swing.JFrame {
         student_company1 = new javax.swing.JTextField();
         student_boss_name = new javax.swing.JTextField();
         btn_close_letter = new javax.swing.JLabel();
+        Panel_email = new javax.swing.JPanel();
+        label_titulo_email = new javax.swing.JLabel();
+        email_asunto = new javax.swing.JTextField();
+        label_asunto_email = new javax.swing.JLabel();
+        email_mensaje = new javax.swing.JTextField();
+        email_archivo = new javax.swing.JLabel();
+        email_destinatario = new javax.swing.JTextField();
+        label_email_email = new javax.swing.JLabel();
+        label_txt_email1 = new javax.swing.JLabel();
+        label_archivo_email1 = new javax.swing.JLabel();
+        email_btn_enviar = new javax.swing.JButton();
         Panel_documentos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,8 +99,6 @@ public class MainMenu extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(31, 61, 109));
         Header.setPreferredSize(new java.awt.Dimension(800, 80));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(MainMenu.class.getResource("/imagenes/icons/logo_its_60.png")));
         Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 60));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -127,7 +128,6 @@ public class MainMenu extends javax.swing.JFrame {
         label_search.setText("Numero de control:");
         Matricula.add(label_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        botonBusqueda.setIcon(new javax.swing.ImageIcon(MainMenu.class.getResource("/imagenes/buttons/search_button.png")));
         botonBusqueda.setMargin(new java.awt.Insets(0, 0, 0, 0));
         botonBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,63 +183,6 @@ public class MainMenu extends javax.swing.JFrame {
         Info.add(buttons, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 370, 140));
 
         Fondo.add(Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 140));
-
-        Panel_email.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label_titulo_email.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        label_titulo_email.setText("Correo electrónico");
-        Panel_email.add(label_titulo_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
-
-        email_asunto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email_asuntoActionPerformed(evt);
-            }
-        });
-        Panel_email.add(email_asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 550, -1));
-
-        label_asunto_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        label_asunto_email.setText("Asunto:");
-        Panel_email.add(label_asunto_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
-
-        email_mensaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email_mensajeActionPerformed(evt);
-            }
-        });
-        Panel_email.add(email_mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 540, -1));
-
-        email_archivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        email_archivo.setText("Ninguno");
-        Panel_email.add(email_archivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
-
-        email_destinatario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email_destinatarioActionPerformed(evt);
-            }
-        });
-        Panel_email.add(email_destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 470, -1));
-
-        label_email_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        label_email_email.setText("Email Destinatario:");
-        Panel_email.add(label_email_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
-
-        label_txt_email1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        label_txt_email1.setText("Mensaje:");
-        Panel_email.add(label_txt_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
-
-        label_archivo_email1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        label_archivo_email1.setText("Archivo:");
-        Panel_email.add(label_archivo_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
-
-        email_btn_enviar.setText("Enviar");
-        email_btn_enviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email_btn_enviarActionPerformed(evt);
-            }
-        });
-        Panel_email.add(email_btn_enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
-
-        Fondo.add(Panel_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 700, 250));
 
         Panel_carta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -305,6 +248,63 @@ public class MainMenu extends javax.swing.JFrame {
         Panel_carta.add(btn_close_letter, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 30, 30));
 
         Fondo.add(Panel_carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 700, 220));
+
+        Panel_email.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_titulo_email.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        label_titulo_email.setText("Correo electrónico");
+        Panel_email.add(label_titulo_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        email_asunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_asuntoActionPerformed(evt);
+            }
+        });
+        Panel_email.add(email_asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 550, -1));
+
+        label_asunto_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label_asunto_email.setText("Asunto:");
+        Panel_email.add(label_asunto_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+
+        email_mensaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_mensajeActionPerformed(evt);
+            }
+        });
+        Panel_email.add(email_mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 540, -1));
+
+        email_archivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        email_archivo.setText("Ninguno");
+        Panel_email.add(email_archivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        email_destinatario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_destinatarioActionPerformed(evt);
+            }
+        });
+        Panel_email.add(email_destinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 470, -1));
+
+        label_email_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label_email_email.setText("Email Destinatario:");
+        Panel_email.add(label_email_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        label_txt_email1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label_txt_email1.setText("Mensaje:");
+        Panel_email.add(label_txt_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        label_archivo_email1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        label_archivo_email1.setText("Archivo:");
+        Panel_email.add(label_archivo_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        email_btn_enviar.setText("Enviar");
+        email_btn_enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_btn_enviarActionPerformed(evt);
+            }
+        });
+        Panel_email.add(email_btn_enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+
+        Fondo.add(Panel_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 700, 250));
         Fondo.add(Panel_documentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 700, 240));
 
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
@@ -317,15 +317,15 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_text_field_searchActionPerformed
 
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
-        if(student_number.getText().equals("") || student_number.getText().length() < 8){
+        if (student_number.getText().equals("") || student_number.getText().length() < 8) {
             return;
         }
-        try{
-            bd.Busqueda(student_name.getText());
-            student_name.setText(bd.getNombre_alumno()+" "+bd.getAlumno_apellido_pat()+" "+bd.getAlumno_apellido_mat());
+        try {
+            bd.Busqueda(text_field_search.getText());
+            nombreAlumno = bd.getNombre_alumno() + " " + bd.getAlumno_apellido_pat() + " " + bd.getAlumno_apellido_mat();
+            student_name.setText(nombreAlumno);
             student_number.setText(bd.getAlumno_institucion());
-        }
-        catch(SQLException | IOException e){
+        } catch (SQLException | IOException e) {
             JOptionPane.showMessageDialog(null, e);
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -344,7 +344,10 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btn_generarCartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generarCartaActionPerformed
         try {
-            PDF.createPDF(student_name.getText(), student_number.getText(), "Sistemas", "GeneralMotors", "Ana Maria", "RH");
+            PDF.createPDF("Chipa Ruiz","12345","sis","non","not chipa","grande");
+//            PDF.createPDF(nombreAlumno, bd.getAlumno_matricula(), "carrera",
+//                    student_company1.getText(), student_boss_name.getText(),
+//                    student_boss_job.getText());
             JOptionPane.showMessageDialog(null, "PDF creado");
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
