@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
 //        Cambiar locacion principal
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null); 
 
     }
 
@@ -57,6 +57,8 @@ public class Login extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(31, 61, 109));
         Header.setPreferredSize(new java.awt.Dimension(800, 80));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        logo_ITS.setIcon(new javax.swing.ImageIcon(getClass().getClassLoader().getResource("./images/icons/logo_its_60.png")));
         Header.add(logo_ITS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 60));
 
         header_title.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -83,11 +85,6 @@ public class Login extends javax.swing.JFrame {
         InicioSesion.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         field_user.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        field_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_userActionPerformed(evt);
-            }
-        });
         InicioSesion.add(field_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 230, -1));
 
         usuario1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -104,11 +101,6 @@ public class Login extends javax.swing.JFrame {
                 btn_enterMouseClicked(evt);
             }
         });
-        btn_enter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_enterActionPerformed(evt);
-            }
-        });
         InicioSesion.add(btn_enter, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 230, 30));
 
         Fondo.add(InicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 80, 340, -1));
@@ -118,14 +110,6 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void field_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_userActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_field_userActionPerformed
-
-    private void btn_enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_enterActionPerformed
-
 //    Evento que permitirá iniciar sesión y cambiar de ventana
     private void btn_enterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_enterMouseClicked
         try {
@@ -134,8 +118,7 @@ public class Login extends javax.swing.JFrame {
                 MainMenu menuPrincipal = new MainMenu(db);
                 menuPrincipal.setVisible(true);
                 dispose();
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
             }
         } catch (SQLException ex) {

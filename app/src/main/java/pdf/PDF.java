@@ -32,9 +32,9 @@ public class PDF {
 //   Variables
 
     private static final String CUR_DIR = System.getProperty("user.dir");
-    private static final String DOCUMENTS_DIR = System.getProperty("user.home") + "\\Documents";
-    private static final String REGULAR = CUR_DIR + "\\src\\main\\java\\fonts\\calibri.ttf";
-    private static final String BOLD = CUR_DIR + "\\src\\main\\java\\fonts\\calibrib.ttf";
+    private static final String DOCUMENTS_DIR = "E:\\Usuario\\Documentos";      // System.getProperty("user.home") + "\\Documents";
+    private static final String REGULAR = CUR_DIR + "\\src\\main\\resources\\fonts\\Montserrat-Regular.ttf";
+    private static final String BOLD = CUR_DIR + "\\src\\main\\resources\\fonts\\Montserrat-SemiBold.ttf";
     private static String nombre_alumno;
     private static String num_control;
     private static String carrera_alum;
@@ -62,8 +62,8 @@ public class PDF {
         document.setFont(font);
 
         //           Header y footer
-        Image header = new Image(ImageDataFactory.create("src\\main\\java\\imagenes\\pdf\\header_pdf.jpg"));
-        Image footer = new Image(ImageDataFactory.create("src\\main\\java\\imagenes\\pdf\\footer_pdf.jpg"));
+        Image header = new Image(ImageDataFactory.create("src\\main\\resources\\images\\pdf\\header_pdf.jpg"));
+        Image footer = new Image(ImageDataFactory.create("src\\main\\resources\\images\\pdf\\footer_pdf.jpg"));
         footer.setHeight(290);
         footer.setFixedPosition(53, 15);
 
@@ -166,6 +166,7 @@ public class PDF {
 
         PdfWriter pdfWriter = null;
         try {
+            System.out.println(DOCUMENTS_DIR);
 //            Creacion del documento y carpeta de alumnos
             File doc = new File(DOCUMENTS_DIR + "\\archivos_alumnos");
             if (!doc.exists()) {

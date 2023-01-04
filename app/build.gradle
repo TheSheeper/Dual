@@ -22,7 +22,7 @@ dependencies {
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
     implementation 'com.itextpdf:itext7-core:7.1.8'
     // https://mvnrepository.com/artifact/org.netbeans.external/AbsoluteLayout
-    implementation 'org.netbeans.external:AbsoluteLayout:RELEASE150'
+    implementation 'org.netbeans.external:AbsoluteLayout:RELEASE160'
     //  Base de datos
     implementation 'com.oracle.database.jdbc:ojdbc6:11.2.0.4'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
