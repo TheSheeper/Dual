@@ -1,10 +1,7 @@
 /*
- * Nose ayuda
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Para pruebas nomas xd
  */
 package ventanas;
-
-import java.time.LocalDate;
 
 /**
  *

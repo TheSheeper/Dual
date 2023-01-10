@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Copyright 2022 Chipa & Alan G.
  */
 package ventanas;
 import BD.BDSentences;
@@ -107,7 +106,7 @@ public class Tabla extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Num Control", "Carrera", "Genero", "Nombre", "Correo", "Num Seguro Social", "Dependencia"
+                "Num Control", "Carrera", "Genero", "Nombre", "Correo", "Dependencia", "Num Seguro Social"
             }
         ) {
             boolean[] canEdit = new boolean [] {

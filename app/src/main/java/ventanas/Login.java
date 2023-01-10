@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 Chipa & Alan G.
  * Pantalla de login
  */
 package ventanas;
@@ -45,6 +46,7 @@ public class Login extends javax.swing.JFrame {
         usuario1 = new javax.swing.JLabel();
         field_password = new javax.swing.JPasswordField();
         btn_enter = new javax.swing.JButton();
+        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Programa Dual");
@@ -103,6 +105,22 @@ public class Login extends javax.swing.JFrame {
         });
         InicioSesion.add(btn_enter, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 230, 30));
 
+        btn_exit.setBackground(new java.awt.Color(31, 61, 109));
+        btn_exit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_exit.setForeground(new java.awt.Color(255, 255, 255));
+        btn_exit.setText("Salir");
+        btn_exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_exitMouseClicked(evt);
+            }
+        });
+        btn_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exitActionPerformed(evt);
+            }
+        });
+        InicioSesion.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 230, 30));
+
         Fondo.add(InicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 80, 340, -1));
 
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
@@ -126,6 +144,14 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_enterMouseClicked
+
+    private void btn_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_exitMouseClicked
+
+    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
+         System.exit(0);
+    }//GEN-LAST:event_btn_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +194,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel Header;
     private javax.swing.JPanel InicioSesion;
     private javax.swing.JButton btn_enter;
+    private javax.swing.JButton btn_exit;
     private javax.swing.JPasswordField field_password;
     private javax.swing.JTextField field_user;
     private javax.swing.JLabel header_title;

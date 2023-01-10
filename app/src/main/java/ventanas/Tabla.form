@@ -151,8 +151,8 @@
                     <Column editable="false" title="Genero" type="java.lang.Object"/>
                     <Column editable="false" title="Nombre" type="java.lang.Object"/>
                     <Column editable="false" title="Correo" type="java.lang.Object"/>
-                    <Column editable="false" title="Num Seguro Social" type="java.lang.Object"/>
                     <Column editable="false" title="Dependencia" type="java.lang.Object"/>
+                    <Column editable="false" title="Num Seguro Social" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Copyright 2022 Chipa & Alan G.
+ * MainMenu es la ventana principal para poder realizar distintas operaciones
  */
 package ventanas;
 
@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import pdf.PDF;
 import mail.MailSession;
 
@@ -258,13 +259,13 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
-//        if (text_field_search.getText().equals("")) {
-//            return;
-//        }
-//        if (text_field_search.getText().length() < 8 || text_field_search.getText().length() > 8) {
-//            JOptionPane.showMessageDialog(null, "La matricula debe ser de 8 caracteres");
-//            return;
-//        }
+        if (text_field_search.getText().equals("")) {
+            return;
+        }
+        if (text_field_search.getText().length() < 8 || text_field_search.getText().length() > 8) {
+            JOptionPane.showMessageDialog(null, "La matricula debe ser de 8 caracteres");
+            return;
+        }
         try {
             bd.Busqueda(text_field_search.getText());
             nombreAlumno = bd.getNombre_alumno() + " " + bd.getAlumno_apellido_pat() + " " + bd.getAlumno_apellido_mat();
@@ -291,7 +292,7 @@ public class MainMenu extends javax.swing.JFrame {
             return;
         }
         try {
-            PDF.createPDF(nombreAlumno, bd.getAlumno_matricula(), bd.getCarrera(), student_company.getText(), student_boss_name.getText(), student_boss_job.getText());
+            PDF.createPDF(nombreAlumno, bd.getAlumno_matricula(), bd.getCarrera(),bd.getSeguroSocial(), student_company.getText(), student_boss_name.getText(), student_boss_job.getText());
             JOptionPane.showMessageDialog(null, "PDF creado");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al crear el PDF");
@@ -326,11 +327,13 @@ public class MainMenu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         RegistrarAlumno ra = new RegistrarAlumno(bd);
         ra.setVisible(true);
+        ra.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Tabla ta = new Tabla(bd);
         ta.setVisible(true);
+        ta.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

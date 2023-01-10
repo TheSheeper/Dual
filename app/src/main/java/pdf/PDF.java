@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright 2022 Chipa & Alan G.
  */
 package pdf;
 
@@ -10,6 +9,8 @@ import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.element.Paragraph;
@@ -21,6 +22,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,18 +35,26 @@ public class PDF {
 //   Variables
 
     private static final String CUR_DIR = System.getProperty("user.dir");
-    private static final String DOCUMENTS_DIR = "E:\\Usuario\\Documentos";      // System.getProperty("user.home") + "\\Documents";
+    private static final String DOCUMENTS_DIR = "E:\\Usuario\\Documentos";      //    System.getProperty("user.home")+"C:\\AppData\\Local";
     private static final String REGULAR = CUR_DIR + "\\src\\main\\resources\\fonts\\Montserrat-Regular.ttf";
-    private static final String BOLD = CUR_DIR + "\\src\\main\\resources\\fonts\\Montserrat-SemiBold.ttf";
+    private static final String BOLD = CUR_DIR + "\\src\\main\\resources\\fonts\\Montserrat-Bold.ttf";
     private static String nombre_alumno;
     private static String num_control;
     private static String carrera_alum;
+    private static String num_seg_social;
     private static String institucion_destinatario;
     private static String nombre_destinatario;
     private static String cargo_destinatario;
 
     public static Text generarNegritas(String frase) {
-        return new Text(frase).setBold();
+        FontProgram fontProgram = null;
+        try {
+            fontProgram = FontProgramFactory.createFont(BOLD);
+        } catch (IOException ex) {
+            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PdfFont bold = PdfFontFactory.createFont(fontProgram, PdfEncodings.WINANSI, true);
+        return new Text(frase).setFont(bold);
     }
 
     public static Text generarSubrayado(String frase) {
@@ -63,9 +74,9 @@ public class PDF {
 
         //           Header y footer
         Image header = new Image(ImageDataFactory.create("src\\main\\resources\\images\\pdf\\header_pdf.jpg"));
-        Image footer = new Image(ImageDataFactory.create("src\\main\\resources\\images\\pdf\\footer_pdf.jpg"));
+        Image footer = new Image(ImageDataFactory.create("src\\main\\resources\\images\\pdf\\footer_pdf_color.jpg"));
         footer.setHeight(290);
-        footer.setFixedPosition(53, 15);
+        footer.setFixedPosition(53, 13);
 
         //            Fecha y lugar 
         Paragraph fecha = new Paragraph("Saltillo, Coahuila, ").add(generarSubrayado(generarFecha()));
@@ -79,6 +90,7 @@ public class PDF {
 //            Destinatario
         Paragraph destinatario = new Paragraph(nombre_destinatario + "\n" + cargo_destinatario + "\n"
                 + institucion_destinatario + "\nP R E S E N T E.-\n\n");
+        destinatario.setMultipliedLeading(1);
         destinatario.setFont(bold);
 
 //            Datos programa y alumno
@@ -88,29 +100,34 @@ public class PDF {
                 + "y a la vez nos permita presentar a la C.");
 
         Paragraph datoNombreAlumno = new Paragraph(nombre_alumno);
+        datoNombreAlumno.setFontSize(10);
         datoNombreAlumno.setFont(bold);
         datoNombreAlumno.setTextAlignment(TextAlignment.CENTER);
 
         Paragraph datosEspecialidad = new Paragraph();
+        datosEspecialidad.setFontSize(10);
         datosEspecialidad.add("Con numero de control ");
         datosEspecialidad.add(generarNegritas(num_control));
-        datosEspecialidad.add(", alumna de este Instituto quien cursa la especialidad de:");
+        datosEspecialidad.add(", alumna de este Instituto quien cursa la Especialidad de:");
 
         Paragraph datoEspecialidad = new Paragraph(carrera_alum);
+        datoEspecialidad.setFontSize(10);
         datoEspecialidad.setTextAlignment(TextAlignment.CENTER);
-        datoEspecialidad.setBold();
+        datoEspecialidad.setFont(bold);
 
         Paragraph datosCursar = new Paragraph("quien desea realizar su ");
+        datosCursar.setFontSize(10);
+        datosCursar.setMultipliedLeading(1);
         datosCursar.add(generarNegritas("PROGRAMA DUAL"));
         datosCursar.add(" dentro de esa empresa, en el periodo ");
-        datosCursar.add(generarNegritas("PERIODO"));
+        datosCursar.add(generarNegritas(generarPeriodo()));
         datosCursar.add(", contando en la actualidad nuestro alumno con seguro facultativo IMSS ");
-        datosCursar.add(generarNegritas("(05229936520)"));
+        datosCursar.add(generarNegritas("("+num_seg_social+")"));
         datosCursar.add(", vigente para tal efecto.");
 
         //            Añadir todos los objetos al documento
-        document.setLeftMargin(53);
-        document.setRightMargin(55);
+        document.setLeftMargin(65);
+        document.setRightMargin(50);
         document.add(header)
                 .add(fecha)
                 .add(asunto)
@@ -124,45 +141,37 @@ public class PDF {
 
         return document;
     }
-
-    public static String generarMes(int mes) {
-        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-        return meses[mes - 1];
+    
+    public static String generarPeriodo(){
+        int anio = LocalDate.now().getYear();
+        int mes = LocalDate.now().getMonth().getValue();
+        String fecha;
+        if(mes <= 6){
+            fecha = "ENERO - JUNIO "+ anio;
+        }
+        else{
+            fecha = "AGOSTO - DICIEMBRE "+ anio;
+        }
+        return fecha;
     }
 
     public static String generarFecha() {
-        String fecha = LocalDate.now().toString();
-        String anio = "";
-        String mes = "";
-        String dia = "";
-        int num = 0;
-
-        for (int i = 0; i < fecha.length(); i++) {
-            if (fecha.charAt(i) == '-') {
-                i++;
-                num++;
-            }
-            switch (num) {
-                case 0 ->
-                    anio += fecha.charAt(i);
-                case 1 ->
-                    mes += fecha.charAt(i);
-                case 2 ->
-                    dia += fecha.charAt(i);
-            }
-        }
-        mes = generarMes(Integer.parseInt(mes));
+        int anio = LocalDate.now().getYear();
+        String mes = LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        mes = mes.toUpperCase().charAt(0) + mes.substring(1);
+        int dia = LocalDate.now().getDayOfMonth();
         return dia + "/" + mes + "/" + anio;
     }
 
-    public static void createPDF(String nombreAlumno, String numControl, String carreraAlum, String institucionDest, String nombreDest, String cargoDest) throws IOException {
-        nombre_alumno = nombreAlumno;
-        num_control = numControl;
-        carrera_alum = carreraAlum;
-        institucion_destinatario = institucionDest;
-        nombre_destinatario = nombreDest;
-        cargo_destinatario = cargoDest;
+    public static void createPDF(String nombreAlumno, String numControl, String carreraAlum, String numSeguroSocial,
+            String institucionDest, String nombreDest, String cargoDest) throws IOException {
+        nombre_alumno = nombreAlumno.toUpperCase();
+        num_control = numControl.toUpperCase();
+        carrera_alum = carreraAlum.toUpperCase();
+        num_seg_social = numSeguroSocial.toUpperCase();
+        institucion_destinatario = institucionDest.toUpperCase();
+        nombre_destinatario = nombreDest.toUpperCase();
+        cargo_destinatario = cargoDest.toUpperCase();
 
         PdfWriter pdfWriter = null;
         try {
@@ -187,7 +196,7 @@ public class PDF {
             pdfWriter = new PdfWriter(file);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
 
-            try ( Document document = new Document(pdfDocument)) {
+            try ( Document document = new Document(pdfDocument, new PageSize(new Rectangle(595, 770)))) {
                 generarParrafos(document);
             }
 
